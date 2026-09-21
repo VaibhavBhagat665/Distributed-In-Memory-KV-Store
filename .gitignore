@@ -1,0 +1,31 @@
+# Agent steering file (workspace-specific, not for version control)
+AGENTS.md
+
+# Build artifacts
+build/
+*.o
+*.a
+*.so
+*.dll
+*.dylib
+
+# Go
+*.exe
+*.test
+*.out
+vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Benchmark results (raw data - keep reports in docs/)
+bench/*.raw
+bench/*.log
