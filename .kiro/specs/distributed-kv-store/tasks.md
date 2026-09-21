@@ -1,6 +1,7 @@
 # Implementation Plan
 
-- [ ] 1. Set up project structure and build system
+- [-] 1. Set up project structure and build system
+
   - Create directory structure: `/engine` (C++), `/node` (Go), `/bench`, `/docs`
   - Set up CMake build for C++ engine with C++17, optimization flags, and test targets
   - Set up Go module with appropriate dependencies
