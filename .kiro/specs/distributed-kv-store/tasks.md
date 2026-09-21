@@ -15,19 +15,19 @@
   - Track statistics: load factor, collision rate, bucket distribution
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 2.2, 2.3_
 
-- [ ]* 2.1 Write property test for hash table round-trip
+- [ ] 2.1 Write property test for hash table round-trip
   - **Property 1: SET-GET round trip**
   - **Validates: Requirements 1.1, 1.2**
 
-- [ ]* 2.2 Write property test for DELETE operation
+- [ ] 2.2 Write property test for DELETE operation
   - **Property 2: DELETE removes keys**
   - **Validates: Requirements 1.4**
 
-- [ ]* 2.3 Write property test for non-existent keys
+- [ ] 2.3 Write property test for non-existent keys
   - **Property 3: Non-existent keys return null**
   - **Validates: Requirements 1.3**
 
-- [ ]* 2.4 Write property test for hash collision handling
+- [ ] 2.4 Write property test for hash collision handling
   - **Property 4: Hash collisions preserve data**
   - **Validates: Requirements 2.2**
 
@@ -38,11 +38,11 @@
   - Evict least-recently-used entry when memory limit is reached
   - _Requirements: 3.1, 3.4_
 
-- [ ]* 3.1 Write unit test for LRU eviction behavior
+- [ ] 3.1 Write unit test for LRU eviction behavior
   - Test specific eviction order with controlled access patterns
   - _Requirements: 3.1_
 
-- [ ]* 3.2 Write property test for access metadata updates
+- [ ] 3.2 Write property test for access metadata updates
   - **Property 5: Access metadata updates on read**
   - **Validates: Requirements 3.4**
 
@@ -53,7 +53,7 @@
   - Make eviction policy configurable (LRU vs LFU) at engine creation
   - _Requirements: 3.2, 3.4_
 
-- [ ]* 4.1 Write unit test for LFU eviction behavior
+- [ ] 4.1 Write unit test for LFU eviction behavior
   - Test specific eviction order with controlled access frequencies
   - _Requirements: 3.2_
 
@@ -64,11 +64,11 @@
   - Make scan frequency configurable
   - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ]* 5.1 Write property test for TTL expiration
+- [ ] 5.1 Write property test for TTL expiration
   - **Property 6: Expired keys return null**
   - **Validates: Requirements 4.1, 4.2**
 
-- [ ]* 5.2 Write unit test for active expiry scan
+- [ ] 5.2 Write unit test for active expiry scan
   - Test that background scan removes expired keys
   - _Requirements: 4.3_
 
@@ -83,7 +83,7 @@
   - Create request router that dispatches operations to owning thread
   - _Requirements: 5.1, 5.2_
 
-- [ ]* 7.1 Write property test for deterministic routing
+- [ ] 7.1 Write property test for deterministic routing
   - **Property 7: Deterministic shard routing**
   - **Validates: Requirements 5.2**
 
@@ -95,7 +95,7 @@
   - Track allocation statistics: slab utilization, fragmentation metrics
   - _Requirements: 6.1, 6.2, 6.3_
 
-- [ ]* 8.1 Write unit tests for slab allocator
+- [ ] 8.1 Write unit tests for slab allocator
   - Test size class selection, freelist reuse, and malloc fallback
   - _Requirements: 6.1, 6.2, 6.3_
 
@@ -129,7 +129,7 @@
   - Verify operations are applied in correct order
   - _Requirements: 7.3_
 
-- [ ]* 13.1 Write property test for WAL recovery
+- [ ] 13.1 Write property test for WAL recovery
   - **Property 8: WAL recovery restores state**
   - **Validates: Requirements 7.1, 7.3**
 
@@ -147,15 +147,15 @@
   - Validate snapshot CRC64 checksum before loading
   - _Requirements: 8.4_
 
-- [ ]* 15.1 Write property test for snapshot + WAL recovery
+- [ ] 15.1 Write property test for snapshot + WAL recovery
   - **Property 9: Snapshot + WAL recovery restores complete state**
   - **Validates: Requirements 8.1, 8.4**
 
-- [ ]* 15.2 Write property test for crash recovery integrity
+- [ ] 15.2 Write property test for crash recovery integrity
   - **Property 10: Crash recovery preserves data integrity**
   - **Validates: Requirements 16.1**
 
-- [ ]* 15.3 Write unit test for WAL truncation after snapshot
+- [ ] 15.3 Write unit test for WAL truncation after snapshot
   - Test that WAL is truncated after successful snapshot
   - _Requirements: 8.3_
 
@@ -175,15 +175,15 @@
   - Support core commands: GET, SET, DELETE, EXPIRE
   - _Requirements: 10.1, 10.2, 10.3, 10.4_
 
-- [ ]* 18.1 Write property test for RESP round-trip
+- [ ] 18.1 Write property test for RESP round-trip
   - **Property 11: RESP command execution round trip**
   - **Validates: Requirements 10.1, 10.2**
 
-- [ ]* 18.2 Write property test for RESP error handling
+- [ ] 18.2 Write property test for RESP error handling
   - **Property 12: RESP error handling**
   - **Validates: Requirements 10.3**
 
-- [ ]* 18.3 Write property test for pipelined requests
+- [ ] 18.3 Write property test for pipelined requests
   - **Property 13: Pipelined request ordering**
   - **Validates: Requirements 10.4**
 
@@ -240,7 +240,7 @@
   - Wire up writes (SET, DELETE, EXPIRE) to Raft proposal (stub for now)
   - _Requirements: 10.1, 10.2_
 
-- [ ]* 26.1 Write integration test for Go RESP server with C++ engine
+- [ ] 26.1 Write integration test for Go RESP server with C++ engine
   - Test end-to-end: client → RESP server → cgo → engine → response
   - _Requirements: 10.1, 10.2_
 
@@ -261,7 +261,7 @@
   - Reset to Follower when higher term discovered
   - _Requirements: 11.1, 11.2_
 
-- [ ]* 29.1 Write property test for single leader per term
+- [ ] 29.1 Write property test for single leader per term
   - **Property 14: Single leader per term**
   - **Validates: Requirements 11.1, 11.2**
 
@@ -273,11 +273,11 @@
   - Followers apply committed entries to their state machine
   - _Requirements: 11.3, 11.4_
 
-- [ ]* 30.1 Write property test for majority quorum
+- [ ] 30.1 Write property test for majority quorum
   - **Property 15: Majority quorum for commits**
   - **Validates: Requirements 11.3**
 
-- [ ]* 30.2 Write property test for state machine consistency
+- [ ] 30.2 Write property test for state machine consistency
   - **Property 16: State machine consistency**
   - **Validates: Requirements 11.4**
 
@@ -287,11 +287,11 @@
   - Leader decrements `nextIndex` on AppendEntries rejection and retries
   - _Requirements: 11.5_
 
-- [ ]* 31.1 Write unit test for log reconciliation
+- [ ] 31.1 Write unit test for log reconciliation
   - Test divergent log scenario and verify convergence
   - _Requirements: 11.5_
 
-- [ ]* 31.2 Write property test for log reconciliation on rejoin
+- [ ] 31.2 Write property test for log reconciliation on rejoin
   - **Property 17: Log reconciliation on rejoin**
   - **Validates: Requirements 11.7**
 
@@ -308,11 +308,11 @@
   - Implement timeout handling for write failures
   - _Requirements: 12.1, 12.4_
 
-- [ ]* 33.1 Write property test for write replication
+- [ ] 33.1 Write property test for write replication
   - **Property 18: Write replication after commit**
   - **Validates: Requirements 12.3, 12.4**
 
-- [ ]* 33.2 Write unit test for write timeout handling
+- [ ] 33.2 Write unit test for write timeout handling
   - Test that client receives error when write fails to achieve quorum within timeout
   - _Requirements: 12.5_
 
@@ -322,11 +322,11 @@
   - Expose cluster status API: current leader, term, member list
   - _Requirements: 15.1, 15.4_
 
-- [ ]* 34.1 Write property test for consistent membership view
+- [ ] 34.1 Write property test for consistent membership view
   - **Property 21: Consistent membership view**
   - **Validates: Requirements 15.2**
 
-- [ ]* 34.2 Write unit test for cluster join
+- [ ] 34.2 Write unit test for cluster join
   - Test node startup and cluster join process
   - _Requirements: 15.1_
 
@@ -340,15 +340,15 @@
   - Test follower reads return data (potentially stale)
   - _Requirements: 11.6, 16.2, 16.3_
 
-- [ ]* 36.1 Write property test for leader crash recovery
+- [ ] 36.1 Write property test for leader crash recovery
   - **Property 19: Leader crash preserves committed writes**
   - **Validates: Requirements 16.2**
 
-- [ ]* 36.2 Write property test for follower catch-up
+- [ ] 36.2 Write property test for follower catch-up
   - **Property 20: Follower catch-up after restart**
   - **Validates: Requirements 16.4**
 
-- [ ]* 36.3 Write unit test for partition tolerance
+- [ ] 36.3 Write unit test for partition tolerance
   - Test that minority partition becomes unavailable while majority continues
   - _Requirements: 15.3_
 
@@ -369,7 +369,7 @@
   - Support K independent shards (K configurable)
   - _Requirements: 18.1_
 
-- [ ]* 39.1 Write property test for consistent shard assignment
+- [ ] 39.1 Write property test for consistent shard assignment
   - **Property 22: Consistent shard assignment**
   - **Validates: Requirements 18.2**
 
@@ -379,7 +379,7 @@
   - Ensure isolation: operations in different shards don't block each other
   - _Requirements: 18.5_
 
-- [ ]* 40.1 Write property test for independent shard replication
+- [ ] 40.1 Write property test for independent shard replication
   - **Property 23: Independent shard replication**
   - **Validates: Requirements 18.5**
 
@@ -390,7 +390,7 @@
   - Compare against naive modulo hashing
   - _Requirements: 18.3, 18.4_
 
-- [ ]* 41.1 Write unit test for limited key redistribution
+- [ ] 41.1 Write unit test for limited key redistribution
   - Test that only affected keys are moved on membership change
   - _Requirements: 18.3_
 
@@ -424,8 +424,7 @@
   - _Requirements: All_
 
 ## Notes
-- Property-based tests marked with "*" are optional but recommended for comprehensive correctness validation
-- Unit tests and integration tests are critical and should be completed
+- All property-based tests and unit tests are required for comprehensive correctness validation
 - Checkpoint tasks ensure incremental progress and early bug detection
 - All benchmark placeholders must be replaced with real measured values before project completion
 - Multi-Raft sharding (tasks 39-41) is a stretch goal - prioritize MVP completion (tasks 1-38) first
