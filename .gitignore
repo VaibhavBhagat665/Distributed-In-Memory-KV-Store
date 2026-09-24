@@ -1,6 +1,9 @@
 # Agent steering file (workspace-specific, not for version control)
 AGENTS.md
 
+# Kiro specs and agent files (development only, not for public repo)
+.kiro/
+
 # Build artifacts
 build/
 *.o
