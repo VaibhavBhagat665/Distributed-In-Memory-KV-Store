@@ -174,8 +174,7 @@ func (mrm *MultiRaftManager) GetShardStatus(shardID ShardID) (*ShardStatus, erro
 		return nil, fmt.Errorf("shard %d not found", shardID)
 	}
 
-	state, term := shard.Node.GetState()
-	isLeader := state
+	term, isLeader := shard.Node.GetState()
 
 	return &ShardStatus{
 		ShardID:     shardID,
@@ -245,7 +244,7 @@ func (mrm *MultiRaftManager) trackLeader(shardID ShardID) {
 			}
 
 			// Get current state
-			isLeader, term := shard.Node.GetState()
+			term, isLeader := shard.Node.GetState()
 
 			mrm.mu.Lock()
 			shard.Term = term
