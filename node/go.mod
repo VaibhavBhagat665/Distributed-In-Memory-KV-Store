@@ -1,4 +1,4 @@
-module github.com/yourusername/kvstore
+module github.com/VaibhavBhagat665/Distributed-In-Memory-KV-Store
 
 go 1.21
 
