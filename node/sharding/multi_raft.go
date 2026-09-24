@@ -160,8 +160,14 @@ func (mrm *MultiRaftManager) ProposeToShard(shardID ShardID, command []byte) err
 		return fmt.Errorf("shard %d not found", shardID)
 	}
 
-	// Propose to Raft
-	return shard.Node.Propose(command)
+	// Propose to Raft (returns index, term, isLeader)
+	_, _, isLeader := shard.Node.Propose(command)
+	
+	if !isLeader {
+		return fmt.Errorf("not leader")
+	}
+	
+	return nil
 }
 
 // GetShardStatus returns status for a specific shard
