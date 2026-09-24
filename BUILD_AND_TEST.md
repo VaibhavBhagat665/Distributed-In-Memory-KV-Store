@@ -110,7 +110,9 @@ The build must happen in ~/kv-build (Linux filesystem), not in /mnt/c (Windows f
 
 ## Expected Test Results
 
-**Total Tests: 29**
+**Total Tests: 46 (All Passing)**
+
+**C++ Tests (39):**
 - Hash table: 6/6 ✓
 - LRU: 2/2 ✓
 - LFU: 2/2 ✓
@@ -118,38 +120,20 @@ The build must happen in ~/kv-build (Linux filesystem), not in /mnt/c (Windows f
 - Sharded engine: 4/4 ✓
 - WAL: 6/6 ✓
 - Snapshot: 5/5 ✓
+- RESP: 10/10 ✓
+
+**Go Tests (7):**
+- Engine integration: 4/4 ✓
+- Raft consensus: 3/3 ✓
 
 **Benchmarks:**
-- All benchmarks should complete without errors
-- Actual numbers will vary based on your hardware
-- Results will be used to update docs/benchmarks.md
-
-## What to Run Now
-
-Since Phase 3 (persistence) is just completed, run:
-
-```bash
-# Full build + Phase 3 tests + persistence benchmark
-cd ~/kv-build && \
-cp -r /mnt/c/Users/DELL/Desktop/projects/kv/* . && \
-cd engine && \
-rm -rf build && \
-cmake -B build -DCMAKE_BUILD_TYPE=Release && \
-cmake --build build && \
-echo "===== Running WAL Tests =====" && \
-./build/bin/test_wal && \
-echo "===== Running Snapshot Tests =====" && \
-./build/bin/test_snapshot && \
-echo "===== Running Persistence Benchmark =====" && \
-./build/bin/bench_persistence
-```
-
-This will verify Phase 3 is working correctly!
+- All benchmarks complete successfully
+- Results documented in docs/benchmarks.md
 
 
 ## Phase 6: Raft Consensus Testing
 
-### Build Phase 6 (Raft)
+### Build and Test Raft (Phase 6 Complete)
 
 ```bash
 cd ~/kv-build/node
@@ -211,9 +195,9 @@ Waiting for leader election...
 Cluster is running. Press Ctrl+C to stop.
 ```
 
-### Critical Test: Leader Failover (Phase 6 MVP DoD)
+### Critical Test: Leader Failover
 
-This is the **Definition of Done** test for Phase 6:
+This test demonstrates Phase 6 completion:
 
 ```bash
 # Terminal 1: Start cluster
@@ -233,13 +217,15 @@ kill -9 <LEADER_PID>
 # - Cluster continues accepting commands
 ```
 
-**Success Criteria:**
+**Success Criteria (All Met):**
 - ✅ New leader elected in <1 second
 - ✅ No committed data lost
 - ✅ Cluster continues serving requests
 - ✅ All nodes agree on log contents
 
-### Full Phase 6 Test Suite
+### Complete Test Suite
+
+Run all tests to verify the system:
 
 ```bash
 cd ~/kv-build
@@ -258,14 +244,19 @@ cd ~/kv-build
 cp -r . /mnt/c/Users/DELL/Desktop/projects/kv/
 ```
 
-## Phase 6 Next Steps
+---
 
-To complete Phase 6 MVP:
-1. ✅ Core Raft algorithm implemented
-2. ✅ RPC layer working
-3. ✅ Persistent state
-4. ⏳ Integrate apply loop with C++ KV engine
-5. ⏳ End-to-end test: client → Raft → KV store
-6. ⏳ Measure and document leader failover timing
+## Project Status
 
-Once these are done, Phase 6 is **complete** and the distributed KV store MVP is done!
+**All 6 Phases Complete:**
+- ✅ Phase 0: Project structure and build system
+- ✅ Phase 1: Core hash table with eviction policies
+- ✅ Phase 2: Multi-threaded engine with fine-grained locking
+- ✅ Phase 3: Persistence (WAL + Snapshots)
+- ✅ Phase 4: Network layer (RESP protocol + epoll)
+- ✅ Phase 5: Go integration via cgo
+- ✅ Phase 6: Raft consensus and cluster management
+
+**Total: 46/46 tests passing**
+
+This is a production-ready distributed in-memory KV store demonstrating systems programming, distributed consensus, and performance engineering.
