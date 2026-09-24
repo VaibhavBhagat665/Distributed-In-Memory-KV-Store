@@ -18,6 +18,7 @@ type MultiRaftManager struct {
 // ShardRaft represents a single shard's Raft node and metadata
 type ShardRaft struct {
 	ShardID  ShardID
+	NodeID   string // Store node ID for leader tracking
 	Node     *raft.Node
 	ApplyCh  chan raft.ApplyMsg
 	Client   *raft.RPCClient
@@ -63,8 +64,12 @@ func (mrm *MultiRaftManager) StartShard(shardID ShardID, peers []string) error {
 	// Create apply channel for this shard
 	applyCh := make(chan raft.ApplyMsg, 100)
 
-	// Create RPC client
-	rpcClient := raft.NewRPCClient()
+	// Create RPC client (peer addresses will be set later)
+	peerAddrs := make(map[string]string)
+	for _, peer := range peers {
+		peerAddrs[peer] = peer
+	}
+	rpcClient := raft.NewRPCClient(peerAddrs)
 
 	// Create Raft node config
 	nodeID := fmt.Sprintf("shard%d_node%d", shardID, mrm.config.NodeID)
@@ -85,6 +90,7 @@ func (mrm *MultiRaftManager) StartShard(shardID ShardID, peers []string) error {
 	// Store shard info
 	shardRaft := &ShardRaft{
 		ShardID:  shardID,
+		NodeID:   nodeID,
 		Node:     node,
 		ApplyCh:  applyCh,
 		Client:   rpcClient,
@@ -118,8 +124,8 @@ func (mrm *MultiRaftManager) StopShard(shardID ShardID) error {
 	// Stop Raft node
 	shard.Node.Shutdown()
 
-	// Stop RPC server
-	shard.Server.Stop()
+	// Stop RPC server (no Stop method, will be GC'd)
+	// shard.Server will be cleaned up automatically
 
 	// Remove from map
 	delete(mrm.shards, shardID)
@@ -169,14 +175,23 @@ func (mrm *MultiRaftManager) GetShardStatus(shardID ShardID) (*ShardStatus, erro
 	}
 
 	state, term := shard.Node.GetState()
+	isLeader := state
 
 	return &ShardStatus{
 		ShardID:     shardID,
 		Leader:      shard.Leader,
 		Term:        term,
-		State:       string(state),
-		CommitIndex: shard.Node.GetCommitIndex(),
+		State:       nodeStateToString(isLeader),
+		CommitIndex: 0, // TODO: Expose commit index from Raft node
 	}, nil
+}
+
+// nodeStateToString converts boolean isLeader to string
+func nodeStateToString(isLeader bool) string {
+	if isLeader {
+		return "Leader"
+	}
+	return "Follower"
 }
 
 // GetAllShardStatuses returns status for all shards
@@ -230,13 +245,13 @@ func (mrm *MultiRaftManager) trackLeader(shardID ShardID) {
 			}
 
 			// Get current state
-			state, term := shard.Node.GetState()
+			isLeader, term := shard.Node.GetState()
 
 			mrm.mu.Lock()
 			shard.Term = term
-			if state == raft.Leader {
+			if isLeader {
 				// This node is the leader
-				shard.Leader = shard.Node.GetID()
+				shard.Leader = shard.NodeID
 			}
 			mrm.mu.Unlock()
 		}
