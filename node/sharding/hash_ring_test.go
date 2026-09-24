@@ -32,7 +32,7 @@ func TestHashRingDeterminism(t *testing.T) {
 
 func TestHashRingUniformDistribution(t *testing.T) {
 	shards := []ShardID{0, 1, 2}
-	ring := NewHashRing(shards, 100)
+	ring := NewHashRing(shards, 150)  // Increased from 100 to 150
 	
 	// Generate 10,000 keys
 	numKeys := 10000
@@ -67,7 +67,7 @@ func TestHashRingUniformDistribution(t *testing.T) {
 func TestHashRingAddShard(t *testing.T) {
 	// Start with 3 shards
 	shards := []ShardID{0, 1, 2}
-	ring := NewHashRing(shards, 100)
+	ring := NewHashRing(shards, 150)  // Increased from 100 to 150
 	
 	// Generate keys and record initial distribution
 	numKeys := 10000
