@@ -2,4 +2,7 @@ module github.com/yourusername/kvstore
 
 go 1.21
 
-// Dependencies will be added as we implement components
+// No external dependencies needed for Phase 5
+// Future phases will add:
+// - Raft consensus library (Phase 6)
+// - Logging and metrics (Phase 8)

@@ -1,6 +1,8 @@
 # Implementation Plan
 
-- [-] 1. Set up project structure and build system
+- [x] 1. Set up project structure and build system
+
+
 
   - Create directory structure: `/engine` (C++), `/node` (Go), `/bench`, `/docs`
   - Set up CMake build for C++ engine with C++17, optimization flags, and test targets
@@ -9,7 +11,9 @@
   - Configure git to ignore build artifacts and IDE files
   - _Requirements: All (foundation)_
 
-- [ ] 2. Implement core C++ hash table with collision handling
+- [x] 2. Implement core C++ hash table with collision handling
+
+
   - Implement custom hash table with chaining for collision resolution
   - Support insert, lookup, delete operations with O(1) average case
   - Implement dynamic resizing when load factor exceeds 0.75

@@ -19,10 +19,27 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Source files (will expand as we add components)
 set(ENGINE_SOURCES
     src/engine.cpp
+    src/hash_table.cpp
+    src/lru_policy.cpp
+    src/lfu_policy.cpp
+    src/sharded_engine.cpp
+    src/wal.cpp
+    src/snapshot.cpp
+    src/resp.cpp
+    src/epoll_server.cpp
 )
 
 set(ENGINE_HEADERS
     include/engine.h
+    include/hash_table.h
+    include/lru_policy.h
+    include/lfu_policy.h
+    include/sharded_engine.h
+    include/wal.h
+    include/snapshot.h
+    include/resp.h
+    include/network_server.h
+    include/epoll_server.h
 )
 
 # Main engine library
@@ -33,11 +50,6 @@ target_include_directories(engine PUBLIC include)
 option(BUILD_TESTS "Build tests" ON)
 if(BUILD_TESTS)
     enable_testing()
-    
-    # RapidCheck - will need to be cloned or installed
-    # For now, we'll add a placeholder
-    # TODO: Add RapidCheck as subdirectory or find_package
-    
     add_subdirectory(tests)
 endif()
 
