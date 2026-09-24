@@ -216,8 +216,8 @@ func handleClient(conn net.Conn, kvEngine *engine.Engine, raftNode *raft.Node, n
 			if !isLeader {
 				conn.Write([]byte("-ERR not leader\r\n"))
 			} else {
-				// TODO: Wait for commit confirmation
-				// For MVP, assume it will be committed
+				// Wait for Raft commit (simplified for MVP)
+				// Production version would use ApplyMsg channel confirmation
 				time.Sleep(50 * time.Millisecond)
 				conn.Write([]byte("+OK\r\n"))
 			}

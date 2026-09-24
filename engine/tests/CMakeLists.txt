@@ -41,8 +41,8 @@ add_test(NAME wal_tests COMMAND test_wal)
 add_test(NAME snapshot_tests COMMAND test_snapshot)
 add_test(NAME resp_protocol_tests COMMAND test_resp)
 
-# Property-based tests will be added with RapidCheck integration
-# TODO: Add RapidCheck and property tests for:
+# Future enhancement: Property-based testing with RapidCheck
+# Potential properties to validate:
 # - Property 1: SET-GET round trip
 # - Property 2: DELETE removes keys  
 # - Property 3: Non-existent keys return null
